@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation("com.alessiodp.libby:libby-core:2.0.0-SNAPSHOT")
+    implementation(files("libs/xibao-1.0.1.jar"))
     compileOnly("com.github.alazeprt:AOneBot:1.0.16-beta")
     compileOnly("com.google.code.gson:gson:2.11.0")
     compileOnly("net.kyori:adventure-api:4.18.0")

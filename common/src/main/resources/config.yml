@@ -25,7 +25,7 @@ storage:
 # 添加白名单
 whitelist:
   # 是否启用该功能
-  enable: true
+  enable: false
 
   # 是否必须绑定后才能进入游戏
   # ! 若关闭该功能, 则 VERIFY_CODE 的验证方法不起效
@@ -129,7 +129,7 @@ chat:
   # [QQ群(${groupId})] ${sender}: ${message}
   group_to_server:
     # 是否启用该功能
-    enable: true
+    enable: false
 
     # 若转发, 需要发送什么作为前缀的消息 (空代表不需要前缀)
     prefix:
@@ -156,7 +156,7 @@ chat:
   # [服务器] ${sender}: ${message}
   server_to_group:
     # 是否启用该功能
-    enable: true
+    enable: false
 
     # 若转发, 需要发送什么作为前缀的消息 (空代表不需要前缀)
     prefix:
@@ -185,7 +185,7 @@ notify:
   # 服务器启停通知
   server_status:
     # 是否开启该功能
-    enable: true
+    enable: false
 
     # 开启时发送的消息:
     start: "[AQQBot] XXX服务器已启动!"
@@ -199,10 +199,10 @@ notify:
     enable: true
 
     # 进入时发送的消息:
-    join: "[AQQBot] ${playerName}(${userId}) 进入了服务器!"
+    join: "${image}"
 
     # 离开时发送的消息:
-    leave: "[AQQBot] ${playerName}(${userId}) 离开了服务器!"
+    leave: "${image}"
 
 # 服务器命令远程执行
 # * 该功能仅支持Bukkit类服务端
@@ -211,7 +211,7 @@ notify:
 # 如: 在游戏里执行 /spark health -> 在QQ群内执行 /sudo spark health
 command_execution:
   # 是否启用该功能
-  enable: true
+  enable: false
 
   # 允许使用该功能的人
   # $ADMIN 代表所有管理员

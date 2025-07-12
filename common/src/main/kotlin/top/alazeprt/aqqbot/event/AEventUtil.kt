@@ -7,7 +7,9 @@ import top.alazeprt.aqqbot.profile.APlayer
 import top.alazeprt.aqqbot.util.AFormatter
 import java.util.*
 import java.util.function.Consumer
-
+import ms.maomer.image.BackgroundImage
+import ms.maomer.image.ImageProcessor
+import java.awt.Color
 object AEventUtil {
     fun whitelistHandler(plugin: AQQBot, playerName: String, kickMethod: Consumer<String>): Boolean {
         if (!plugin.generalConfig.getBoolean("whitelist.enable", null) || !plugin.generalConfig.getBoolean("whitelist.need_bind_to_login", null)) return false
@@ -33,15 +35,34 @@ object AEventUtil {
             val qq: Long = plugin.getQQByPlayer(plugin.adapter!!.getOfflinePlayer(playerName))?: -1L
             plugin.submitAsync {
                 plugin.enableGroups.forEach {
-                    if (!plugin.generalConfig.getBoolean("notify.player_status.group_enable", it.key.toLong())) return@submitAsync
+                    //if (!plugin.generalConfig.getBoolean("notify.player_status.group_enable", it.key.toLong())) return@submitAsync
                     val messagePath = "notify.player_status.${if (isJoin) "join" else "leave"}"
                     val message = if (plugin.generalConfig.getStringList(messagePath, it.key.toLong()).isEmpty())
                         plugin.generalConfig.getString(messagePath, it.key.toLong())?: ""
                     else plugin.generalConfig.getStringList(messagePath, it.key.toLong()).random()
+                    var imageAsBase64: String? = null
+                    when (isJoin) {
+                        true -> {
+                            imageAsBase64 = ImageProcessor.createAsBase64(
+                                BackgroundImage.IMAGE_ONE,
+                                String.format("%s\n进入了服务器", playerName),
+                                color = Color.RED,
+                                fontSize = 96f
+                            )
+                        }
+                        false -> {
+                            imageAsBase64 = ImageProcessor.createAsBase64(
+                                BackgroundImage.IMAGE_TWO,
+                                String.format("%s\n离开了服务器",playerName),
+                                color=Color.BLACK,
+                                fontSize = 96f
+                            )
+                        }
+                    }
+                    val img = String.format("[CQ:image,file=base64://%s]", imageAsBase64)
                     BotProvider.getBot()?.action(
                         SendGroupMessage(it.key.toLong(), plugin.setPlaceholders(player, message)
-                            .replace("\${playerName}", playerName)
-                            .replace("\${userId}", qq.toString()), true)
+                            .replace("\${image}", img))
                     )
                 }
             }

@@ -5,8 +5,8 @@ import com.alessiodp.libby.Library
 import com.alessiodp.libby.LibraryManager
 import me.clip.placeholderapi.PlaceholderAPI
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
-import org.bstats.bukkit.Metrics
-import org.bukkit.Bukkit
+// org.bstats.bukkit.Metrics
+//import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import top.alazeprt.aconfiguration.file.FileConfiguration
 import top.alazeprt.aconfiguration.file.YamlConfiguration
@@ -73,7 +73,7 @@ class AQQBotBukkit : JavaPlugin(), AQQBot {
         }
         audience = BukkitAudiences.create(this);
         server.pluginManager.registerEvents(BukkitEventHandler(this), this)
-        val metrics = Metrics(this, pluginId)
+        //val metrics = Metrics(this, pluginId)
     }
 
     override fun onDisable() {
